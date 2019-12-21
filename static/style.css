@@ -1,0 +1,12 @@
+body{
+	background-image: url('../static/bgimage.jpg');
+}
+.custom{
+	position:relative;
+	/*border: 1px solid black;*/
+	margin: 2% 2%;
+	padding: 3% 2%;
+	box-shadow: 1px 1px 10px grey;
+	border-radius: 10px;
+	background: #F9F9F9;
+}
