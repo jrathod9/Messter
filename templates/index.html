@@ -10,7 +10,10 @@
   </head>
   <body>
   <section class="section">
-    
+    {% if not correct %}
+    <p>Incorrect username or password !! Try again !!</p>
+    {% else %}
+    {% endif %}
     <div class="container has-text-centered" >
       <h1 class="title has-text-centered">
         Messter
@@ -20,12 +23,12 @@
         <div class="container custom">
         <div class="tile is-4"></div>
         <div class="tile is-4">
-         <form class="has-text-centered">
+         <form class="has-text-centered" method="POST" action={{ url_for('verifylogin') }} name="login_form">
           <h3 class="title is-5">Login</h3>
-            <label for="roll">Roll number</label>
+            <label for="rollno">Roll number</label>
               <div class="field">
                 <div class="control">
-                  <input name="roll" class="input is-small" type="text" placeholder="Roll No.">
+                  <input name="rollno" class="input is-small" type="text" placeholder="Roll No.">
                 </div>
               </div>
            <label for="pass">Password</label>
@@ -52,12 +55,12 @@
         <div class="container custom">
         <div class="tile is-4"></div>
         <div class="tile is-4">
-         <form class="has-text-centered">
+         <form class="has-text-centered" method="POST" action={{ url_for('verifylogin') }} name="register_form">
           <h3 class="title is-5">Register</h3>
-            <label for="roll">Roll number</label>
+            <label for="rollno">Roll number</label>
               <div class="field">
                 <div class="control">
-                  <input name="roll" class="input is-small" type="text" placeholder="Roll No.">
+                  <input name="rollno" class="input is-small" type="text" placeholder="Roll No.">
                 </div>
               </div>
            <label for="pass">Password</label>
@@ -89,7 +92,6 @@
      <p onclick="loginn()">Login</p>
     </div>
     </div>
-
   </section>
 
   <br>

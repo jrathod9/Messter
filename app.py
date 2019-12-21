@@ -1,11 +1,12 @@
 from flask import Flask, flash, redirect, url_for, render_template, request, session, abort
 import datetime
 import os
+import sys
 import json
 import sqlite3
 import hashlib
 
-db = 'Database/db.sqlite3'
+db = './data/messter'
 
 conn = sqlite3.connect(db)
 app = Flask(__name__)
@@ -15,28 +16,23 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 
 
-@app.route("/",methods = ['POST'])
-def index():
-	if(request.method == 'GET'):
-		rollno = request.form["rollno"]
-		passwrd = request.form["pass"]
-
-		hashedpass = hashlib.sha256(str.encode())
-		hashedpass = hashedpass.hexdigest()
+@app.route("/")
+def index():	
+	return render_template("index.html", correct = True)
 
 
-		with sqlite3.connect(db) as conn:
-			cur = con.cursor()
-			cur.execute("SELECT * FROM user WHERE rollno=? AND passwrd=?",[rollno,hashedpass])
-			details = cur.fetchall()
-			if details is not None:
-				return render_template("userprofile.html" , rollno = rollno)
-			else:
-				return render_template("index.html",)	
-	return render_template("index.html")
-
-
+@app.route("/user_home", methods = ['POST'])
 def verifylogin():
+	rollno = request.form["rollno"]
+	password = request.form["pass"]
+	with sqlite3.connect(db) as connection:
+		cur = connection.cursor()
+		details = cur.execute("SELECT * FROM user WHERE roll_no=? AND password=?",[rollno,password]).fetchall()
+		print(details, file = sys.stderr)
+		if len(details) != 0:
+			return render_template("userprofile.html" , rollno = rollno)
+		else:
+			return render_template("index.html", correct = False)
 
 
 if __name__ == "__main__":
