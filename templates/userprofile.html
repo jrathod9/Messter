@@ -9,9 +9,42 @@
     <link rel="stylesheet" type="text/css" href="../static/style.css">
   </head>
   <body>
+    <div style="text-align: right;">You have 10 credits!</div>
   	<div class="container has-text-centered"> 
   		<div class="title is-2">Welcome!</div>
   		<h1 class="title is-1">U17CO074</h1>
+      <h2 class="tile is-3">Todays menu:</h2>
+      <table class="table" style="margin: 1%;">
+        <thead>
+          <tr>
+            <th>Meal</th>
+            <th>Items</th>
+            <th>Going?</th>
+          </tr>          
+        </thead>
+        <tbody>
+          <tr>
+            <td>Breakfast</td>
+            <td>Idli,Sambhar,Chutney</td>
+            <td><input type="checkbox" name="breakfast"></td>
+          </tr>
+          <tr>
+            <td>Lunch</td>
+            <td>Moong Dal, Potato, Roti, Curd, Rice</td>
+            <td><input type="checkbox" name="lunch"></td>
+          </tr>
+          <tr>
+            <td>Dinner</td>
+            <td>Pav, Bhaji, Custard</td>
+            <td><input type="checkbox" name="dinner"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br>
+      <button class="button is-dark">Submit</button>  
+      <br><br><br><br><br>
+      <p>Logout</p>
   	</div>
+    <br><br>
   </body>
 </html>
