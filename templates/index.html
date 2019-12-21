@@ -15,7 +15,7 @@
       <h1 class="title has-text-centered">
         Messter
       </h1>
-      <div class="container">
+      <div class="container" id="tilelogin">
       <div class="tile is-ancestor">
         <div class="container custom">
         <div class="tile is-4"></div>
@@ -39,13 +39,57 @@
         </div>
       </div>
         <div class="tile is-4"></div>
-        </div>
-      </div>
-    </div>  
+        </div>      
     <br>  
     <div class="container has-text-centered">
-    <a href="register.html">Register</a>
+    <p onclick="registerr()">Register</p>
     </div>
+    </div>
+    </div>
+
+    <div class="container" style="display: none;" id="tileregister">
+      <div class="tile is-ancestor">
+        <div class="container custom">
+        <div class="tile is-4"></div>
+        <div class="tile is-4">
+         <form class="has-text-centered">
+          <h3 class="title is-5">Register</h3>
+            <label for="roll">Roll number</label>
+              <div class="field">
+                <div class="control">
+                  <input name="roll" class="input is-small" type="text" placeholder="Roll No.">
+                </div>
+              </div>
+           <label for="pass">Password</label>
+              <div class="field">
+                <div class="control">
+                  <input name="pass" class="input is-small" type="password" placeholder="Password">
+                </div>
+              </div>
+            <label for="height">Height(cm.)</label>
+              <div class="field">
+                <div class="control">
+                  <input name="height" class="input is-small" type="number" placeholder="Height">
+                </div>
+              </div>
+            <label for="weight">Weight(Kg)</label>
+              <div class="field">
+                <div class="control">
+                  <input name="weight" class="input is-small" type="number" placeholder="Weight">
+                </div>
+              </div>
+          <button class="button is-dark">Register</button>
+         </form> 
+        </div>
+      </div>
+        <div class="tile is-4"></div>
+        </div> 
+    <br>  
+    <div class="container has-text-centered">
+     <p onclick="loginn()">Login</p>
+    </div>
+    </div>
+
   </section>
 
   <br>
@@ -60,4 +104,14 @@
   <br>
 
   </body>
+  <script type="text/javascript">
+    function registerr(){
+      document.getElementById('tilelogin').style.display = "none";
+      document.getElementById('tileregister').style.display = "block";      
+    }
+    function loginn(){
+      document.getElementById('tileregister').style.display = "none";
+      document.getElementById('tilelogin').style.display = "block";      
+    }
+  </script>
 </html>
