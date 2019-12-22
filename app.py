@@ -5,12 +5,10 @@ import sys
 import json
 import sqlite3
 import hashlib
-from flask_mysqldb import MySQL
 
 
 db = './data/messter'
 
-conn = sqlite3.connect(db)
 app = Flask(__name__)
 
 app.secret_key = 'super secret key'
