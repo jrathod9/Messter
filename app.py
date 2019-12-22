@@ -23,14 +23,15 @@ def index():
 
 @app.route("/user_home", methods = ['POST'])
 def verifylogin():
-	if 'login_form' in request.form:
+	if request.form["formname"] == "login_form":
 		rollno = request.form["rollno"]
 		password = request.form["pass"]
 		with sqlite3.connect(db) as connection:
 			cur = connection.cursor()
-			details = cur.execute("SELECT * FROM user WHERE roll_no=? AND password=?",[rollno,password]).fetchall()
+			details = cur.execute("SELECT * FROM user WHERE roll_no = ? AND password = ?",[rollno,password]).fetchall()
 			print(details, file = sys.stderr)
 			if len(details) != 0:
+
 				return render_template("userprofile.html" , rollno = rollno)
 			else:
 				return render_template("index.html", correct = False, registered = False)
