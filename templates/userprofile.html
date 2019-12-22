@@ -23,7 +23,8 @@
   		<div class="title is-2">Welcome!</div>
   		<h1 class="title is-1">{{ rollno }}</h1>
       <h2 class="tile is-3">Todays menu:</h2>
-      <form name="menu">
+      <form name="menu" method="GET" action= {{ url_for('verifylogin') }}>
+        <input type="text" name="formname" default="form_fill" style="display: none">
       <table class="table" style="margin: 1%;">
         <thead>
           <tr>
@@ -36,24 +37,26 @@
           <tr>
             <td>Breakfast</td>
             <td>{{ breakfast }}</td>
-            <td><input type="checkbox" name="breakfast"></td>
+            <td>
+              <input type="checkbox" name="meal" value="breakfast">
+            </td>
           </tr>
           <tr>
             <td>Lunch</td>
             <td>{{ lunch }}</td>
-            <td><input type="checkbox" name="lunch"></td>
+            <td><input type="checkbox" name="meal" value="lunch"></td>
           </tr>
           <tr>
             <td>Dinner</td>
             <td>{{ dinner }}</td>
-            <td><input type="checkbox" name="dinner"></td>
+            <td><input type="checkbox" name="meal" value="dinner"></td>
           </tr>
         </tbody>
       </table>
       <br><br>
       <button class="button is-dark">Submit</button>
       </form>  
-      <br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br>
       <p>Logout</p>
   	</div>
 

@@ -14,8 +14,6 @@ app = Flask(__name__)
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
 
-
-
 @app.route("/")
 def index():	
 	return render_template("index.html", correct = True, registered = False)
@@ -32,9 +30,12 @@ def verifylogin():
 		
 		details = cur.execute("SELECT * FROM user WHERE roll_no = ? AND password = ?",[rollno,password]).fetchall()
 		print(details, file = sys.stderr)
-		breakfast = cur.execute("SELECT breakfast from menu")
-		lunch = cur.execute("SELECT lunch from menu")
-		dinner = cur.execute("SELECT dinner from menu")
+		breakfast = cur.execute("SELECT breakfast from menu").fetchall()
+		breakfast = breakfast[0]
+		lunch = cur.execute("SELECT lunch from menu").fetchall()
+		lunch = lunch[0]
+		dinner = cur.execute("SELECT dinner from menu").fetchall()
+		dinner = dinner[0]
 		if len(details) != 0:
 			return render_template("userprofile.html" , rollno = rollno, breakfast = breakfast , lunch = lunch , dinner = dinner)
 		else:
@@ -42,6 +43,18 @@ def verifylogin():
 		conn.commit()
 		cur.close()
 		conn.close()
+	elif request.form["formname"] == "fill_form":
+		conn = sqlite3.connect(db)
+		cur = conn.cursor()
+		arr = request.form.getlist('meal')
+		print(arr)
+		# if arr[0]:
+		# 	upd = cur.execute("UPDATE attendance SET breakfast = breakfast - 1 ")
+		# if !arr[1]:
+		# 	upd = cur.execute("UPDATE attendance SET lunch = lunch - 1 ")
+		# if !arr[2]:
+		# 	upd = cur.execute("UPDATE attendance SET dinner = dinner - 1 ")
+
 	else:
 		rollno = request.form["rollno"]
 		password = request.form["pass"]
