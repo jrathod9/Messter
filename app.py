@@ -30,8 +30,11 @@ def verifylogin():
 			cur = connection.cursor()
 			details = cur.execute("SELECT * FROM user WHERE roll_no=? AND password=?",[rollno,password]).fetchall()
 			print(details, file = sys.stderr)
+			breakfast = cur.execute("SELECT breakfast from menu")
+			lunch = cur.execute("SELECT lunch from menu")
+			dinner = cur.execute("SELECT dinner from menu")
 			if len(details) != 0:
-				return render_template("userprofile.html" , rollno = rollno)
+				return render_template("userprofile.html" , rollno = rollno, breakfast = breakfast , lunch = lunch , dinner = dinner)
 			else:
 				return render_template("index.html", correct = False, registered = False)
 	else:

@@ -21,7 +21,7 @@
     <!-- IF NOT SUBMITTED YET -->
   	<div class="container has-text-centered"> 
   		<div class="title is-2">Welcome!</div>
-  		<h1 class="title is-1">U17CO074</h1>
+  		<h1 class="title is-1">{{ rollno }}</h1>
       <h2 class="tile is-3">Todays menu:</h2>
       <form name="menu">
       <table class="table" style="margin: 1%;">
@@ -35,17 +35,17 @@
         <tbody>
           <tr>
             <td>Breakfast</td>
-            <td>Idli,Sambhar,Chutney</td>
+            <td>{{ breakfast }}</td>
             <td><input type="checkbox" name="breakfast"></td>
           </tr>
           <tr>
             <td>Lunch</td>
-            <td>Moong Dal, Potato, Roti, Curd, Rice</td>
+            <td>{{ lunch }}</td>
             <td><input type="checkbox" name="lunch"></td>
           </tr>
           <tr>
             <td>Dinner</td>
-            <td>Pav, Bhaji, Custard</td>
+            <td>{{ dinner }}</td>
             <td><input type="checkbox" name="dinner"></td>
           </tr>
         </tbody>
