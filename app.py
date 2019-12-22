@@ -19,30 +19,36 @@ def index():
 	return render_template("index.html", correct = True, registered = False)
 
 
-@app.route("/user_home", methods = ['POST'])
+@app.route("/login_success", methods = ['POST'])
 def verifylogin():
 	if request.form["formname"] == "login_form":
-		conn = sqlite3.connect(db)
-		cur = conn.cursor()
 		rollno = request.form["rollno"]
-		print(rollno)
+		#print(rollno)
 		password = request.form["pass"]
-		
-		details = cur.execute("SELECT * FROM user WHERE roll_no = ? AND password = ?",[rollno,password]).fetchall()
-		print(details, file = sys.stderr)
-		breakfast = cur.execute("SELECT breakfast from menu").fetchall()
-		breakfast = breakfast[0]
-		lunch = cur.execute("SELECT lunch from menu").fetchall()
-		lunch = lunch[0]
-		dinner = cur.execute("SELECT dinner from menu").fetchall()
-		dinner = dinner[0]
-		if len(details) != 0:
-			return render_template("userprofile.html" , rollno = rollno, breakfast = breakfast , lunch = lunch , dinner = dinner)
+		if rollno == "admin" and password == "admin":
+			return redirect(url_for('admin'))
 		else:
-			return render_template("index.html", correct = False, registered = False)
-		conn.commit()
-		cur.close()
-		conn.close()
+			conn = sqlite3.connect(db)
+			cur = conn.cursor()
+			rollno = request.form["rollno"]
+			#print(rollno)
+			password = request.form["pass"]
+			
+			details = cur.execute("SELECT * FROM user WHERE roll_no = ? AND password = ?",[rollno,password]).fetchall()
+			print(details, file = sys.stderr)
+			breakfast = cur.execute("SELECT breakfast from menu").fetchall()
+			breakfast = breakfast[0]
+			lunch = cur.execute("SELECT lunch from menu").fetchall()
+			lunch = lunch[0]
+			dinner = cur.execute("SELECT dinner from menu").fetchall()
+			dinner = dinner[0]
+			if len(details) != 0:
+				return render_template("userprofile.html" , rollno = rollno, breakfast = breakfast , lunch = lunch , dinner = dinner)
+			else:
+				return render_template("index.html", correct = False, registered = False)
+			conn.commit()
+			cur.close()
+			conn.close()
 	elif request.form["formname"] == "fill_form":
 		conn = sqlite3.connect(db)
 		cur = conn.cursor()
