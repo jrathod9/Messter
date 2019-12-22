@@ -5,6 +5,8 @@ import sys
 import json
 import sqlite3
 import hashlib
+from flask_mysqldb import MySQL
+
 
 db = './data/messter'
 
