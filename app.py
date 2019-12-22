@@ -25,15 +25,21 @@ def index():
 def verifylogin():
 	rollno = request.form["rollno"]
 	password = request.form["pass"]
-	with sqlite3.connect(db) as connection:
-		cur = connection.cursor()
-		details = cur.execute("SELECT * FROM user WHERE roll_no=? AND password=?",[rollno,password]).fetchall()
-		print(details, file = sys.stderr)
-		if len(details) != 0:
-			return render_template("userprofile.html" , rollno = rollno)
-		else:
-			return render_template("index.html", correct = False)
+	if rollno == "admin" and password == "admin":
+		return render_template("admin.html")
+	else:
+		with sqlite3.connect(db) as connection:
+			cur = connection.cursor()
+			details = cur.execute("SELECT * FROM user WHERE roll_no=? AND password=?",[rollno,password]).fetchall()
+			print(details, file = sys.stderr)
+			if len(details) != 0:
+				return render_template("userprofile.html" , rollno = rollno)
+			else:
+				return render_template("index.html", correct = False)
 
+@app.route("/admin")
+def admin():
+	return render_template("admin.html")
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
