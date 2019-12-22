@@ -43,7 +43,7 @@ def verifylogin():
 			dinner = cur.execute("SELECT dinner from menu").fetchall()
 			dinner = dinner[0]
 			if len(details) != 0:
-				return render_template("userprofile.html" , rollno = rollno, breakfast = breakfast , lunch = lunch , dinner = dinner)
+				return render_template("userprofile.html" , rollno = rollno, breakfast = breakfast , lunch = lunch , dinner = dinner, recorded = False)
 			else:
 				return render_template("index.html", correct = False, registered = False)
 			conn.commit()
@@ -77,6 +77,10 @@ def verifylogin():
 @app.route("/admin")
 def admin():
 	return render_template("admin.html")
+
+@app.route("/userprofile/submit",methods=['POST'])
+def submit():
+	return render_template("userprofile.html",rollno = "", breakfast = "" , lunch = "" , dinner = "", recorded = True)
 
 
 if __name__ == "__main__":

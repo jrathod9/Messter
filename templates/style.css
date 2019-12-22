@@ -1,6 +1,10 @@
 body{
 	background-image: url('../static/bgimage.jpg');
-	background-repeat: repeat-y;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	height:100%;
+
 }
 .custom{
 	position:relative;
