@@ -18,16 +18,14 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route("/")
 def index():	
-	return render_template("index.html", correct = True)
+	return render_template("index.html", correct = True, registered = False)
 
 
 @app.route("/user_home", methods = ['POST'])
 def verifylogin():
-	rollno = request.form["rollno"]
-	password = request.form["pass"]
-	if rollno == "admin" and password == "admin":
-		return render_template("admin.html")
-	else:
+	if 'login_form' in request.form:
+		rollno = request.form["rollno"]
+		password = request.form["pass"]
 		with sqlite3.connect(db) as connection:
 			cur = connection.cursor()
 			details = cur.execute("SELECT * FROM user WHERE roll_no=? AND password=?",[rollno,password]).fetchall()
@@ -35,11 +33,21 @@ def verifylogin():
 			if len(details) != 0:
 				return render_template("userprofile.html" , rollno = rollno)
 			else:
-				return render_template("index.html", correct = False)
+				return render_template("index.html", correct = False, registered = False)
+	else:
+		rollno = request.form["rollno"]
+		password = request.form["pass"]
+		wt = request.form['weight']
+		ht = request.form['height']
+		with sqlite3.connect(db) as connection:
+			cur = connection.cursor()
+			cur.execute("INSERT INTO user(roll_no, height, weight, password) VALUES (?, ?, ?, ?);", [rollno, ht, wt, password])
+			return render_template("index.html", correct = True, registered = True)
 
 @app.route("/admin")
 def admin():
 	return render_template("admin.html")
+
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
